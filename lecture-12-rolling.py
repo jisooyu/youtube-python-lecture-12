@@ -83,14 +83,14 @@ def plot_metrics(results):
 
 if __name__ == '__main__':
 
-    # tickers = ["MSFT", "IBM", "HD", "GS", "XOM", "DIS", "KO", "CSCO", "CVX", "CAT", "BA", "AAPL", "AXP", "MMM"]
-    tickers = ["IBM", "HD",  "KO", "CSCO", "CVX", "CAT", "BA", "AXP", "MMM"]
+    tickers = ["MSFT", "IBM", "HD", "GS", "XOM", "DIS", "KO", "CSCO", "CVX", "CAT", "BA", "AAPL", "AXP", "MMM", "CW"]
+    # tickers = ["IBM", "HD",  "KO", "CSCO", "CVX", "CAT", "BA", "AXP", "MMM"]
     
     start = (dt.datetime.today() - dt.timedelta(days=365 * 20)).strftime('%Y-%m-%d')
     end = dt.datetime.today().strftime('%Y-%m-%d')
 
     df_ohlcv = fetch_data(tickers, start, end, interval='1mo')
-    df_cls = df_ohlcv['Adj Close'].dropna(how='all')
+    df_cls = df_ohlcv['Close'].dropna(how='all')
     df_cls_ret = df_cls.pct_change(fill_method=None).fillna(0)
 
     # Rolling backtest with a 5-year window and 1-year step
